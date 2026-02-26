@@ -40,7 +40,7 @@ function totalExperienceYears(experience) {
 
 function skillGroups(skills) {
   return {
-    'Frontend Architecture': skills.filter((s) => /React|Redux|JavaScript|HTML|CSS|Responsive|Performance/i.test(s)),
+    'Frontend Architecture': skills.filter((s) => /React|Redux|JavaScript|TypeScript|Next|HTML|CSS|Responsive|Performance/i.test(s)),
     'API and System Boundaries': skills.filter((s) => /REST|PHP|MySQL|boundary/i.test(s)),
     'Operations and Delivery': skills.filter((s) => /Apache|Nginx|AWS|Linux|CI\/CD/i.test(s))
   };
@@ -82,7 +82,7 @@ export default function ResumePage() {
   return (
     <Box className={styles.page}>
       <Box className={styles.header}>
-        <Typography variant="h2">Resume overview</Typography>
+        <Typography component="h1" variant="h2">Resume overview</Typography>
         <Typography variant="body1" color="text.secondary">
           Fast hiring scan of experience, skills, and delivery evidence sourced from resume databank content.
         </Typography>
@@ -94,10 +94,11 @@ export default function ResumePage() {
           <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mb: 1.3 }}>
             <Chip label={`${years}+ years delivery experience`} className={styles.availabilityChip} />
             <Chip label={`${resume.selected_projects.length} featured project impacts`} className={styles.availabilityChip} />
-            <Chip label="React architecture + API coordination" className={styles.availabilityChip} />
+            <Chip label="React/Next.js architecture + API coordination" className={styles.availabilityChip} />
+            <Chip label="Hands-on + end-to-end ownership" className={styles.availabilityChip} />
           </Stack>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1.6 }}>
-            Looking for a frontend engineer who can structure complex workflows, align API boundaries early, and ship reliably through production handoff.
+            Strong fit for roles that need engineering maturity, systems ownership, and reliable hands-on execution.
           </Typography>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} useFlexGap flexWrap="wrap">
             <Button
@@ -133,7 +134,7 @@ export default function ResumePage() {
           <CardContent>
             <Typography variant="h3" sx={{ mb: 1.25 }}>Availability</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 1.2 }}>
-              Available for full-time roles, consulting, and remote collaboration.
+              Available for full-time roles, consulting, and remote collaboration across senior IC scopes that value ownership and reliability.
             </Typography>
             <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
               {resume.availability?.full_time && <Chip label="Full-time" className={styles.availabilityChip} />}

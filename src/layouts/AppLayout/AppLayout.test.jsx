@@ -15,10 +15,10 @@ vi.mock('react-router-dom', async () => {
 import AppLayout from './AppLayout';
 
 describe('AppLayout', () => {
-  it('renders domain title and nav labels', () => {
+  it('renders profile title and nav labels', () => {
     render(<AppLayout />);
 
-    expect(screen.getByText('localhost')).toBeInTheDocument();
+    expect(screen.getAllByText('Prateek Kumar').length).toBeGreaterThan(0);
     expect(screen.getByText('Home', { selector: 'button' })).toBeInTheDocument();
     expect(screen.getByText('Projects', { selector: 'button' })).toBeInTheDocument();
     expect(screen.getByText('Resume', { selector: 'button' })).toBeInTheDocument();

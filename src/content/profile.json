@@ -2,9 +2,9 @@
   "identity": {
     "name": "Prateek Kumar",
     "primary_title": "Senior Software Engineer",
-    "positioning": "Senior software engineer who moves to the layer where systems leak, then hardens React architecture and client-API boundaries before incidents repeat.",
-    "core_trait": "Moves to the layer where systems leak, fixes structural issues early, and prevents repeat production incidents.",
-    "engineering_identity": "Cross-layer engineer (frontend architecture, API contracts, operations)",
+    "positioning": "Senior Software Engineer working primarily as a Frontend Engineer, with 6+ years building production-grade React and Next.js systems with end-to-end ownership.",
+    "core_trait": "Thinks in system boundaries, not isolated components, and brings ownership from architecture through production reliability.",
+    "engineering_identity": "Hands-on Frontend Engineer with cross-layer understanding and prior Team Lead, Reporting Manager, and Product Owner responsibilities in startup environments.",
     "location": "Bengaluru, Karnataka, India",
     "availability": {
       "full_time": true,
@@ -36,10 +36,11 @@
 
   "technical_scope": {
     "primary_strengths": [
-      "Frontend architecture for React applications",
+      "Frontend architecture for React and Next.js applications",
       "System boundary design (client and API)",
       "Workflow-driven product platforms",
-      "Multi-tenant and white-label delivery systems"
+      "Multi-tenant and white-label delivery systems",
+      "Hands-on ownership across startup teams and products"
     ],
     "cross_layer_understanding": {
       "backend": "Strong professional background; capable of guiding API design and integration boundaries without claiming deep DB ownership",
@@ -54,7 +55,9 @@
     },
     "languages_and_platforms": [
       "JavaScript",
+      "TypeScript",
       "React",
+      "Next.js",
       "React Native",
       "Android (Java)",
       "PHP (professional, historical)",

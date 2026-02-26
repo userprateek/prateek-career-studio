@@ -1,9 +1,10 @@
 {
   "domain": "userprateek.com",
   "contact": {
-    "email": "userprateek.com@gmail.com",
+    "email": "info@userprateek.com",
     "phone": "+919036593930",
-    "linkedin": "https://www.linkedin.com/in/userprateek"
+    "linkedin": "https://www.linkedin.com/in/userprateek",
+    "wellfound": "https://wellfound.com/u/userprateek"
   },
   "routes": [
     { "path": "/", "label": "Home" },

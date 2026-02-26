@@ -4,9 +4,10 @@
     "headline": "Senior Software Engineer",
     "location": "Bengaluru, Karnataka, India",
     "contact": {
-      "email": "userprateek.com@gmail.com",
+      "email": "info@userprateek.com",
       "phone": "+919036593930",
       "linkedin": "https://www.linkedin.com/in/userprateek",
+      "wellfound": "https://wellfound.com/u/userprateek",
       "website": "https://userprateek.com"
     },
     "availability": {
@@ -16,21 +17,21 @@
     }
   },
   "positioning": {
-    "primary_value": "Builds stable, maintainable product systems by improving frontend architecture and client↔API boundaries.",
+    "primary_value": "Builds production-grade React and Next.js systems as a Senior Software Engineer operating primarily as a Frontend Engineer, with end-to-end ownership from architecture through release reliability.",
     "working_style": [
       "Systems-first problem solving",
       "Cross-functional collaboration",
       "Execution ownership from design to release"
     ],
     "target_roles": [
-      "Senior Frontend Engineer",
       "Senior Software Engineer",
+      "Frontend Engineer",
       "Full-stack Product Engineer (frontend-leaning)",
       "Application Architect"
     ]
   },
   "career_snapshot": {
-    "years_experience": "5+",
+    "years_experience": "6+",
     "current_company": "Maventech Labs",
     "prior_company": "Travelyaari",
     "education": "B.Tech, Computer Science Engineering (2014-2018)"

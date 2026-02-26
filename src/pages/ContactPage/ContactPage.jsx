@@ -2,39 +2,30 @@ import React from 'react';
 import { Box, Button, Card, CardContent, Chip, Stack, Typography } from '@mui/material';
 import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import PhoneInTalkRoundedIcon from '@mui/icons-material/PhoneInTalkRounded';
-import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded';
-import TaskAltRoundedIcon from '@mui/icons-material/TaskAltRounded';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import WorkOutlineRoundedIcon from '@mui/icons-material/WorkOutlineRounded';
 
 import site from '../../content/site.json';
 import resume from '../../content/resume.json';
 
 import styles from './ContactPage.module.scss';
 
-function openExternal(url) {
-  window.location.assign(url);
+function getWhatsAppUrl(phone) {
+  const digits = String(phone || '').replace(/\D/g, '');
+  const text = encodeURIComponent('Hi Prateek, I would like to discuss a Senior Software Engineer / Frontend Engineer opportunity.');
+  return `https://wa.me/${digits}?text=${text}`;
 }
 
 export default function ContactPage() {
   const { contact } = site;
-  const [copied, setCopied] = React.useState(false);
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(contact.email);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
-    } catch {
-      setCopied(false);
-    }
-  };
+  const whatsappUrl = getWhatsAppUrl(contact.phone);
 
   return (
     <Box className={styles.page}>
       <Box className={styles.header}>
-        <Typography variant="h2">Contact</Typography>
+        <Typography component="h1" variant="h2">Contact</Typography>
         <Typography variant="body1" color="text.secondary">
-          Open to full-time roles, consulting, and architecture-focused product collaborations.
+          Open to full-time roles, consulting, and product collaborations that need hands-on frontend systems ownership and reliable execution.
         </Typography>
       </Box>
 
@@ -44,7 +35,7 @@ export default function ContactPage() {
             <Stack spacing={1.5}>
               <Typography variant="h3">Hiring quick view</Typography>
               <Typography variant="body2" color="text.secondary">
-                Best fit: teams modernizing complex workflows and looking for strong React architecture plus API coordination.
+                Best fit: teams modernizing complex workflows and looking for production-grade frontend engineering with dependable ownership.
               </Typography>
               <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
                 {resume.availability.full_time && <Chip label="Full-time" className={styles.availabilityChip} />}
@@ -61,19 +52,23 @@ export default function ContactPage() {
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
                 <Button
                   className={styles.actionButton}
-                  variant={copied ? 'contained' : 'outlined'}
-                  startIcon={copied ? <TaskAltRoundedIcon /> : <ContentCopyRoundedIcon />}
-                  onClick={copyEmail}
+                  variant="contained"
+                  color="success"
+                  startIcon={<WhatsAppIcon />}
+                  component="a"
+                  href={whatsappUrl}
+                  rel="noopener noreferrer"
                 >
-                  {copied ? 'Email copied' : 'Copy email address'}
+                  Chat on WhatsApp
                 </Button>
                 <Button
                   className={styles.actionButton}
-                  variant="contained"
+                  variant="outlined"
                   startIcon={<MailOutlineRoundedIcon />}
-                  onClick={() => openExternal(`mailto:${contact.email}`)}
+                  component="a"
+                  href={`mailto:${contact.email}`}
                 >
-                  Send email now
+                  Send email
                 </Button>
               </Stack>
             </Stack>
@@ -84,16 +79,42 @@ export default function ContactPage() {
           <CardContent>
             <Typography variant="h3" sx={{ mb: 1.4 }}>Contact channels</Typography>
             <Stack spacing={1}>
-              <Button className={styles.actionButton} variant="contained" startIcon={<MailOutlineRoundedIcon />} onClick={() => openExternal(`mailto:${contact.email}`)}>
-                Send email
-              </Button>
-              <Button className={styles.actionButton} variant="outlined" startIcon={<LinkedInIcon />} onClick={() => openExternal(contact.linkedin)}>
+              <Button
+                className={styles.actionButton}
+                variant="outlined"
+                startIcon={<LinkedInIcon />}
+                component="a"
+                href={contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Open LinkedIn
               </Button>
-              <Button className={styles.actionButton} variant="outlined" startIcon={<PhoneInTalkRoundedIcon />} onClick={() => openExternal(`tel:${contact.phone}`)}>
+              {contact.wellfound && (
+                <Button
+                  className={styles.actionButton}
+                  variant="outlined"
+                  startIcon={<WorkOutlineRoundedIcon />}
+                  component="a"
+                  href={contact.wellfound}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open Wellfound
+                </Button>
+              )}
+              <Button
+                className={styles.actionButton}
+                variant="outlined"
+                component="a"
+                href={`tel:${contact.phone}`}
+              >
                 Call phone
               </Button>
             </Stack>
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 1.2 }}>
+              WhatsApp business number: {contact.phone}
+            </Typography>
           </CardContent>
         </Card>
 
@@ -101,13 +122,14 @@ export default function ContactPage() {
           <CardContent>
             <Typography variant="h3" sx={{ mb: 1.2 }}>How to reach out</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 1.6 }}>
-              Share role context, current product constraints, and expected delivery timeline. Responses are prioritized for active hiring discussions.
+              Share role context, expected ownership level, and delivery timeline. Responses are prioritized for active hiring discussions.
             </Typography>
             <Box className={styles.messageGuide}>
               <Typography variant="subtitle2" sx={{ mb: 0.7 }}>Helpful first message format</Typography>
               <Stack spacing={0.7}>
                 <Typography variant="body2">• Company and team context</Typography>
                 <Typography variant="body2">• Product/workflow complexity you need help with</Typography>
+                <Typography variant="body2">• Ownership expectation: hands-on IC scope or a blended IC-plus-team coordination scope</Typography>
                 <Typography variant="body2">• Hiring timeline and interview process</Typography>
               </Stack>
             </Box>
@@ -115,18 +137,9 @@ export default function ContactPage() {
             <Box className={styles.responseNote}>
               <Typography variant="subtitle2" sx={{ mb: 0.4 }}>Response expectation</Typography>
               <Typography variant="body2" color="text.secondary">
-                Email is the fastest route for role discussions. Include job scope and hiring window for a quicker, relevant reply.
+                WhatsApp is fastest for initial response. Email is best for sharing detailed JD, scope, and hiring process.
               </Typography>
             </Box>
-
-            <Stack spacing={1} sx={{ mt: 1.5 }}>
-              <Button className={styles.actionButton} variant="contained" startIcon={<MailOutlineRoundedIcon />} onClick={() => openExternal(`mailto:${contact.email}`)}>
-                Email hiring details
-              </Button>
-              <Button className={styles.actionButton} variant="outlined" startIcon={<LinkedInIcon />} onClick={() => openExternal(contact.linkedin)}>
-                Message on LinkedIn
-              </Button>
-            </Stack>
           </CardContent>
         </Card>
       </Box>

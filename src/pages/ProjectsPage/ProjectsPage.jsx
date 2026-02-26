@@ -202,9 +202,9 @@ export default function ProjectsPage() {
   return (
     <Box className={styles.page}>
       <Box className={styles.header}>
-        <Typography variant="h2">Project case studies</Typography>
+        <Typography component="h1" variant="h2">Project case studies</Typography>
         <Typography variant="body1" color="text.secondary">
-          Databank-grounded portfolio stories showing business context, architecture choices, and delivery outcomes.
+          Databank-grounded portfolio stories showing business context, architecture and product decisions, and measurable delivery outcomes.
         </Typography>
       </Box>
 
@@ -213,7 +213,7 @@ export default function ProjectsPage() {
           <Typography variant="h3" sx={{ mb: 1.2 }}>How to scan these case studies quickly</Typography>
           <Stack spacing={0.8}>
             <Typography variant="body2" color="text.secondary">• Start with <strong>Context</strong> to see business constraints and scale.</Typography>
-            <Typography variant="body2" color="text.secondary">• Use <strong>Approach</strong> to understand architecture and decision quality.</Typography>
+            <Typography variant="body2" color="text.secondary">• Use <strong>Approach</strong> to understand architecture and ownership judgment.</Typography>
             <Typography variant="body2" color="text.secondary">• Validate with <strong>Results</strong> and visual evidence for delivery credibility.</Typography>
           </Stack>
         </CardContent>

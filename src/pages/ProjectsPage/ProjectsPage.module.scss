@@ -33,11 +33,13 @@
   justify-content: space-between;
   gap: 12px;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .badgeChip {
   color: #05111e !important;
   font-weight: 680 !important;
+  align-self: flex-start;
 }
 
 .elevatorPitch {
@@ -71,6 +73,7 @@
 
 .discussButton {
   justify-content: flex-start;
+  width: fit-content;
 }
 
 .detailGrid {

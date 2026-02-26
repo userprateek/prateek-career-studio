@@ -38,10 +38,6 @@ function MetricCard({ label, value, detail }) {
   );
 }
 
-function openExternal(url) {
-  window.location.assign(url);
-}
-
 function monthDiff(startYm, endYm) {
   const [startY, startM] = startYm.split('-').map(Number);
   const startDate = new Date(Date.UTC(startY, startM - 1, 1));
@@ -65,7 +61,7 @@ export default function HomePage() {
 
   const rotatingLines = React.useMemo(() => [
     'I turn fragile workflows into reliable product systems.',
-    'I clarify frontend and API contracts before teams hit production pain.',
+    'I own systems end-to-end: architecture, delivery, and production reliability.',
     'I ship with structure: plan clearly, execute steadily, release safely.'
   ], []);
 
@@ -102,29 +98,40 @@ export default function HomePage() {
       detail: 'Based on listed engineering experience from 2019 to present.'
     },
     {
-      label: 'Case studies with documented decisions',
-      value: `${Object.keys(signature_projects).length}`,
-      detail: 'Each project shows context, architecture choices, and outcomes.'
+      label: 'Ownership across delivery scope',
+      value: '3 roles',
+      detail: 'Handled Team Lead, Reporting Manager, and Product Owner responsibilities where required.'
     },
     {
-      label: 'Government launch turnaround',
-      value: '1 week',
-      detail: 'Delivered Android and iOS for AWTAR / KSRTC within deadline.'
+      label: 'Case studies with documented decisions',
+      value: `${Object.keys(signature_projects).length}`,
+      detail: 'Each project shows business context, technical decisions, and outcomes.'
     }
   ];
 
   const capabilities = [
-    'React architecture for workflow-heavy products',
-    'Client and API boundary design with explicit contracts',
-    'Profiling-led performance and reliability improvements',
-    'Reusable platform strategy for white-label and multi-tenant systems',
-    'Execution ownership from planning through release'
+    'Production-grade React and Next.js architecture for workflow-heavy products',
+    'System boundary design across client, API, auth, and infrastructure edges',
+    'CI/CD ownership with release reliability and rollback-safe delivery',
+    'Production debugging across SSL, reverse proxy, and auth-cookie behavior',
+    'Hands-on ownership across teams and product streams'
   ];
 
   const outcomes = [
     profile.signature_projects.cargo_web.outcomes[4],
     profile.signature_projects.platform_consolidation.outcomes[1],
     profile.signature_projects.awtar_ksrtc.result[0]
+  ];
+
+  const technicalExpertise = [
+    'React.js',
+    'Next.js',
+    'JavaScript / TypeScript',
+    'Prisma',
+    'PostgreSQL',
+    'CI/CD',
+    'System Architecture',
+    'API Integration'
   ];
 
   return (
@@ -135,14 +142,14 @@ export default function HomePage() {
             <Stack spacing={2.2} className={styles.fadeUp}>
               <Chip label="Open to full-time and freelance roles" color="primary" className={styles.availabilityBanner} />
 
-              <Typography variant="h1">{identity.name}</Typography>
+              <Typography component="h1" variant="h1">Prateek Kumar - Senior Software Engineer | Frontend Engineer</Typography>
 
               <Typography variant="h2" className={styles.headline}>
                 {identity.positioning}
               </Typography>
 
               <Typography variant="body1" className={styles.heroLead}>
-                {resume.summary[0]}
+                I build scalable, production-grade web systems using React.js and Next.js, with hands-on ownership from architecture to deployment. My scope includes API integration, CI/CD workflows, and production reliability for complex user-facing products.
               </Typography>
 
               <Typography variant="body2" className={styles.typewriter} aria-live="polite">
@@ -161,7 +168,12 @@ export default function HomePage() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.2}>
-                <Button variant="contained" endIcon={<ArrowOutwardRoundedIcon />} onClick={() => openExternal(`mailto:${site.contact.email}`)}>
+                <Button
+                  variant="contained"
+                  endIcon={<ArrowOutwardRoundedIcon />}
+                  component="a"
+                  href={`mailto:${site.contact.email}`}
+                >
                   Contact for hiring
                 </Button>
                 <Button variant="outlined" startIcon={<DescriptionRoundedIcon />} onClick={() => navigate('/resume')}>
@@ -193,6 +205,21 @@ export default function HomePage() {
           <Box className={styles.metricGrid}>
             {metrics.map((item) => (
               <MetricCard key={item.label} label={item.label} value={item.value} detail={item.detail} />
+            ))}
+          </Box>
+        </CardContent>
+      </Card>
+
+      <Card variant="outlined">
+        <CardContent>
+          <Typography component="h2" variant="h3" sx={{ mb: 1.2 }}>
+            Technical Expertise
+          </Typography>
+          <Box component="ul" sx={{ m: 0, pl: 2.5 }}>
+            {technicalExpertise.map((item) => (
+              <Typography key={item} component="li" variant="body2" sx={{ mb: 0.55 }}>
+                {item}
+              </Typography>
             ))}
           </Box>
         </CardContent>
@@ -236,7 +263,7 @@ export default function HomePage() {
               Need this in your team?
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              For hiring conversations around React architecture, API coordination, and reliable delivery, use email or LinkedIn.
+              For teams needing a senior individual contributor with ownership mindset, I can own complex delivery tracks while staying deeply hands-on in execution.
             </Typography>
             <Button variant="contained" sx={{ mt: 1.4 }} onClick={() => navigate('/contact')}>
               Go to contact details

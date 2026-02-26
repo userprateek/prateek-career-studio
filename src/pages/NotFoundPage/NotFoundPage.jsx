@@ -9,7 +9,7 @@ export default function NotFoundPage() {
   return (
     <Box sx={{ py: 6 }}>
       <Stack spacing={2}>
-        <Typography variant="h4" sx={{ fontWeight: 800 }}>
+        <Typography component="h1" variant="h4" sx={{ fontWeight: 800 }}>
           Page not found
         </Typography>
 

@@ -35,6 +35,12 @@
     border-radius: 999px;
     background: radial-gradient(circle, rgba(177, 140, 255, 0.24), transparent 62%);
     pointer-events: none;
+    z-index: 0;
+  }
+
+  :global(.MuiCardContent-root) {
+    position: relative;
+    z-index: 1;
   }
 }
 
@@ -62,6 +68,8 @@
 
 .actionButton {
   justify-content: flex-start;
+  text-align: left;
+  white-space: normal;
 
   @media (max-width: 599px) {
     width: 100%;

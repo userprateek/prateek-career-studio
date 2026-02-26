@@ -21,15 +21,14 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import site from '../../content/site.json';
 import profile from '../../content/profile.json';
 import avatar from '../../assets/profile/prateek-primary.jpg';
+import SeoManager from '../../components/SeoManager/SeoManager';
 
 import styles from './AppLayout.module.scss';
-import { getRuntimeDomain } from '../../utils/runtimeDomain';
 
 export default function AppLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const runtimeDomain = getRuntimeDomain();
 
   const go = (path) => {
     setOpen(false);
@@ -40,16 +39,17 @@ export default function AppLayout() {
 
   return (
     <Box className={styles.root}>
+      <SeoManager />
       <Box className={styles.backgroundPattern} aria-hidden="true" />
 
       <Container maxWidth="xl" className={styles.frame}>
-        <Box className={styles.mobileTopBar}>
+        <Box className={styles.mobileTopBar} data-nosnippet>
           <Box>
             <Typography variant="overline" className={styles.brandKicker}>
               Portfolio
             </Typography>
             <Typography variant="h6" className={styles.brand}>
-              {runtimeDomain}
+              {profile.identity.name}
             </Typography>
           </Box>
 
@@ -78,7 +78,14 @@ export default function AppLayout() {
                   <Button variant="contained" size="small" onClick={() => go('/contact')}>
                     Hire Prateek
                   </Button>
-                  <Button variant="outlined" size="small" onClick={() => window.location.assign(site.contact.linkedin)}>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    component="a"
+                    href={site.contact.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     LinkedIn
                   </Button>
                 </Stack>
@@ -86,7 +93,7 @@ export default function AppLayout() {
 
               <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)' }} />
 
-              <Box className={styles.desktopNav} aria-label="Primary navigation">
+              <Box className={styles.desktopNav} aria-label="Primary navigation" data-nosnippet>
                 {site.routes.map((route) => (
                   <Button
                     key={route.path}
@@ -102,17 +109,17 @@ export default function AppLayout() {
             </Box>
           </Card>
 
-          <Box className={styles.contentColumn}>
+          <Box component="main" className={styles.contentColumn}>
             <Outlet />
           </Box>
         </Box>
 
-        <Card variant="outlined" className={styles.mobileProfileCard}>
+        <Card variant="outlined" className={styles.mobileProfileCard} data-nosnippet>
           <Stack spacing={1.2} direction="row" alignItems="center">
             <Avatar
               src={avatar}
               alt={profile.identity.name}
-              sx={{ width: 58, height: 58 }}
+              className={styles.mobileAvatar}
               imgProps={{ loading: 'lazy', decoding: 'async' }}
             />
             <Box>
@@ -126,9 +133,9 @@ export default function AppLayout() {
           </Stack>
         </Card>
 
-        <Box component="footer" className={styles.footer}>
+        <Box component="footer" className={styles.footer} data-nosnippet>
           <Typography variant="body2" color="text.secondary">
-            © {new Date().getFullYear()} {runtimeDomain}
+            © {new Date().getFullYear()} {profile.identity.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Built with React + MUI
@@ -137,7 +144,7 @@ export default function AppLayout() {
       </Container>
 
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-        <Box sx={{ width: 290, p: 2.25 }} role="presentation">
+        <Box sx={{ width: 290, p: 2.25 }} role="presentation" data-nosnippet>
           <Typography variant="overline" color="text.secondary">
             Navigate
           </Typography>

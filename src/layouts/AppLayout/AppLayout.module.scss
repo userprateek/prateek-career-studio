@@ -85,7 +85,30 @@
 .profileAvatar {
   width: 94px !important;
   height: 94px !important;
+  overflow: hidden;
+  background: rgba(9, 16, 29, 0.88);
   border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 20px rgba(2, 8, 19, 0.34);
+
+  img {
+    object-fit: cover;
+    object-position: 50% 20%;
+    transform: scale(1.04);
+  }
+}
+
+.mobileAvatar {
+  width: 58px !important;
+  height: 58px !important;
+  overflow: hidden;
+  background: rgba(9, 16, 29, 0.88);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+
+  img {
+    object-fit: cover;
+    object-position: 50% 20%;
+    transform: scale(1.04);
+  }
 }
 
 .desktopNav {
@@ -95,6 +118,7 @@
 
 .navButton {
   justify-content: flex-start !important;
+  text-align: left;
 }
 
 .contentColumn {
@@ -117,6 +141,7 @@
   padding-top: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.11);
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 10px;
 

@@ -1,16 +1,17 @@
 # Prateek Kumar
 **Senior Software Engineer**  
 Bengaluru, Karnataka, India  
-+91 90365 93930 · userprateek.com@gmail.com  
++91 90365 93930 · info@userprateek.com  
 LinkedIn: https://www.linkedin.com/in/userprateek
+Wellfound: https://wellfound.com/u/userprateek
 
 ## Professional Summary
-- Senior software engineer specializing in React architecture, API contract alignment, and production-grade delivery for workflow-heavy platforms.
-- Builds maintainable, observable systems by replacing tightly coupled implementations with explicit boundaries and stable integration patterns.
-- Trusted to lead execution across planning, code review, release coordination, and production support in cross-functional environments.
+- Senior Software Engineer working primarily as a Frontend Engineer, with 6+ years building production-grade React and Next.js systems.
+- Owns end-to-end frontend delivery including architecture, CI/CD and release reliability, and production debugging across API, SSL, reverse proxy, and auth-cookie boundaries.
+- Also handled Team Lead, Reporting Manager, and Product Owner responsibilities across multiple startup products while staying deeply hands-on in execution.
 
 ## Core Skills
-React.js, Redux, JavaScript, Responsive UI (mobile-first), REST APIs, System boundary design (client ↔ API), Performance optimization, React Native, HTML/CSS/SCSS, PHP (CodeIgniter), MySQL, Apache/Nginx, AWS (EC2, S3), Linux, CI/CD
+React.js, Next.js, Redux, JavaScript, TypeScript, Responsive UI (mobile-first), REST APIs, System boundary design (client ↔ API), Performance optimization, Team leadership, Product ownership, React Native, HTML/CSS/SCSS, PHP (CodeIgniter), MySQL, Apache/Nginx, AWS (EC2, S3), Linux, CI/CD
 
 ## Experience
 ### Senior Software Engineer — Maventech Labs
@@ -18,6 +19,8 @@ React.js, Redux, JavaScript, Responsive UI (mobile-first), REST APIs, System bou
 - Led React/Redux architecture for responsive web products, establishing reusable component patterns and predictable state flows.
 - Defined and negotiated API contracts with backend teams, improving integration clarity and reducing cross-team debugging friction.
 - Drove profiling-led performance and reliability improvements through targeted refactoring and regression-safe release practices.
+- Handled production-level debugging across SSL setup, reverse proxies, and auth-cookie behavior to keep critical workflows stable.
+- Also handled Team Lead, Reporting Manager, and Product Owner responsibilities for multiple startup products while remaining hands-on in engineering decisions and implementation.
 - Owned delivery workflow end-to-end: sprint planning, code reviews, release coordination, and reporting across concurrent streams.
 
 ### Software Engineer — Travelyaari

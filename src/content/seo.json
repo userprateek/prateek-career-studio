@@ -1,0 +1,62 @@
+{
+  "site_name": "Prateek Kumar Portfolio",
+  "site_url": "https://userprateek.com",
+  "default_title": "Prateek Kumar | Senior Software Engineer | Frontend Engineer",
+  "title_template": "%s | Prateek Kumar",
+  "default_description": "Prateek Kumar is a Senior Software Engineer and Frontend Engineer with 6+ years building production-grade React and Next.js systems. He combines end-to-end delivery ownership, CI/CD and infrastructure reliability, plus team and product ownership experience in startup environments.",
+  "default_image": "/og/prateek-profile.jpg",
+  "author": "Prateek Kumar",
+  "person_job_title": "Senior Software Engineer",
+  "person_description": "Senior Software Engineer working as a Frontend Engineer with production-grade React/Next.js delivery, systems ownership, and team/product ownership experience across products and teams.",
+  "locale": "en_IN",
+  "keywords": [
+    "Prateek Kumar",
+    "Senior Software Engineer",
+    "Frontend Engineer",
+    "React.js Engineer",
+    "Next.js Engineer",
+    "React Ecosystem",
+    "Frontend Systems Ownership",
+    "CI/CD",
+    "TypeScript Engineer",
+    "Prisma",
+    "PostgreSQL",
+    "Team Lead",
+    "Product Owner",
+    "JavaScript Engineer",
+    "Bangalore Engineer"
+  ],
+  "same_as": [
+    "https://github.com/userprateek",
+    "https://www.linkedin.com/in/userprateek",
+    "https://wellfound.com/u/userprateek"
+  ],
+  "routes": {
+    "/": {
+      "title": "Prateek Kumar | Senior Software Engineer",
+      "description": "Senior Software Engineer and Frontend Engineer with 6+ years building production-grade React/Next.js systems with end-to-end ownership.",
+      "type": "website"
+    },
+    "/projects": {
+      "title": "Projects and Case Studies",
+      "description": "Real-world frontend and architecture case studies across legacy modernization, platform consolidation, and high-pressure delivery.",
+      "type": "article"
+    },
+    "/resume": {
+      "title": "Resume and Experience",
+      "description": "Prateek Kumar's resume: Senior Software Engineer designation, frontend systems ownership, CI/CD and reliability depth, plus team and product ownership experience.",
+      "type": "profile"
+    },
+    "/contact": {
+      "title": "Contact Prateek Kumar",
+      "description": "Contact Prateek Kumar for full-time, freelance, and consulting opportunities needing hands-on frontend systems ownership and reliable execution.",
+      "type": "profile"
+    },
+    "/404": {
+      "title": "Page Not Found",
+      "description": "The page you were looking for does not exist.",
+      "noindex": true,
+      "type": "website"
+    }
+  }
+}
