@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
   Box,
@@ -49,8 +48,8 @@ function monthDiff(startYm, endYm) {
 }
 
 export default function HomePage() {
-  const navigate = useNavigate();
   const { identity, signature_projects } = profile;
+  const profilePhotoSrc = typeof primaryPhoto === 'string' ? primaryPhoto : primaryPhoto?.src;
 
   const heroStyle = site.design?.hero_background_image
     ? { '--hero-bg': `url(${site.design.hero_background_image})` }
@@ -59,37 +58,7 @@ export default function HomePage() {
   const totalMonths = resume.experience.reduce((sum, job) => sum + monthDiff(job.start, job.end), 0);
   const years = Math.max(1, Math.floor(totalMonths / 12));
 
-  const rotatingLines = React.useMemo(() => [
-    'I turn fragile workflows into reliable product systems.',
-    'I own systems end-to-end: architecture, delivery, and production reliability.',
-    'I ship with structure: plan clearly, execute steadily, release safely.'
-  ], []);
-
-  const [lineIndex, setLineIndex] = React.useState(0);
-  const [typedText, setTypedText] = React.useState('');
-  const [isDeleting, setIsDeleting] = React.useState(false);
-
-  React.useEffect(() => {
-    const fullLine = rotatingLines[lineIndex];
-    const typingDelay = isDeleting ? 34 : 56;
-
-    const timer = window.setTimeout(() => {
-      if (!isDeleting && typedText === fullLine) {
-        window.setTimeout(() => setIsDeleting(true), 850);
-        return;
-      }
-
-      if (isDeleting && typedText.length === 0) {
-        setIsDeleting(false);
-        setLineIndex((prev) => (prev + 1) % rotatingLines.length);
-        return;
-      }
-
-      setTypedText((prev) => (isDeleting ? prev.slice(0, -1) : fullLine.slice(0, prev.length + 1)));
-    }, typingDelay);
-
-    return () => window.clearTimeout(timer);
-  }, [typedText, isDeleting, lineIndex, rotatingLines]);
+  const tagline = 'I own systems end-to-end: architecture, delivery, and production reliability.';
 
   const metrics = [
     {
@@ -153,8 +122,7 @@ export default function HomePage() {
               </Typography>
 
               <Typography variant="body2" className={styles.typewriter} aria-live="polite">
-                <span>{typedText}</span>
-                <span className={styles.cursor} aria-hidden="true">|</span>
+                <span>{tagline}</span>
               </Typography>
 
               <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 880 }}>
@@ -176,10 +144,10 @@ export default function HomePage() {
                 >
                   Contact for hiring
                 </Button>
-                <Button variant="outlined" startIcon={<DescriptionRoundedIcon />} onClick={() => navigate('/resume')}>
+                <Button variant="outlined" startIcon={<DescriptionRoundedIcon />} href="/resume">
                   Review resume
                 </Button>
-                <Button variant="text" onClick={() => navigate('/projects')}>
+                <Button variant="text" href="/projects">
                   View project outcomes
                 </Button>
               </Stack>
@@ -187,7 +155,7 @@ export default function HomePage() {
 
             <Box className={styles.photoWrap}>
               <Avatar
-                src={primaryPhoto}
+                src={profilePhotoSrc}
                 alt={identity.name}
                 className={styles.profilePhoto}
                 imgProps={{ loading: 'lazy', decoding: 'async' }}
@@ -265,7 +233,7 @@ export default function HomePage() {
             <Typography variant="body2" color="text.secondary">
               For teams needing a senior individual contributor with ownership mindset, I can own complex delivery tracks while staying deeply hands-on in execution.
             </Typography>
-            <Button variant="contained" sx={{ mt: 1.4 }} onClick={() => navigate('/contact')}>
+            <Button variant="contained" sx={{ mt: 1.4 }} href="/contact">
               Go to contact details
             </Button>
           </CardContent>

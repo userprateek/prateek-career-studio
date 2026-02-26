@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Button, Card, CardContent, Chip, Divider, Stack, Typography } from '@mui/material';
 import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 import ArrowOutwardRoundedIcon from '@mui/icons-material/ArrowOutwardRounded';
-import { useNavigate } from 'react-router-dom';
 
 import resume from '../../content/resume.json';
 
@@ -48,36 +47,7 @@ function skillGroups(skills) {
 
 export default function ResumePage() {
   const grouped = skillGroups(resume.core_skills);
-  const navigate = useNavigate();
   const years = totalExperienceYears(resume.experience);
-
-  const handlePdfDownload = async (event) => {
-    event.preventDefault();
-
-    if (!HAS_RESUME_PDF) return;
-
-    try {
-      const response = await fetch(RESUME_PDF_PATH, { cache: 'no-store' });
-      if (!response.ok) {
-        throw new Error('Unable to download resume PDF.');
-      }
-
-      const blob = await response.blob();
-      const objectUrl = window.URL.createObjectURL(blob);
-
-      const anchor = document.createElement('a');
-      anchor.href = objectUrl;
-      anchor.download = 'prateek-kumar-resume.pdf';
-      document.body.appendChild(anchor);
-      anchor.click();
-      anchor.remove();
-
-      window.URL.revokeObjectURL(objectUrl);
-    } catch {
-      // Fallback for environments where blob download is restricted.
-      window.location.assign(RESUME_PDF_PATH);
-    }
-  };
 
   return (
     <Box className={styles.page}>
@@ -104,12 +74,14 @@ export default function ResumePage() {
             <Button
               variant="contained"
               startIcon={<DownloadRoundedIcon />}
-              onClick={handlePdfDownload}
+              component="a"
+              href={RESUME_PDF_PATH}
+              download
               disabled={!HAS_RESUME_PDF}
             >
               Download PDF resume
             </Button>
-            <Button variant="outlined" endIcon={<ArrowOutwardRoundedIcon />} onClick={() => navigate('/contact')}>
+            <Button variant="outlined" endIcon={<ArrowOutwardRoundedIcon />} href="/contact">
               Start hiring conversation
             </Button>
           </Stack>

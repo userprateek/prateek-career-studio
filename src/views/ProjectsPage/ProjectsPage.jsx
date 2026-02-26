@@ -10,7 +10,6 @@ import {
   Typography
 } from '@mui/material';
 import ArrowOutwardRoundedIcon from '@mui/icons-material/ArrowOutwardRounded';
-import { useNavigate } from 'react-router-dom';
 
 import profile from '../../content/profile.json';
 import projectStories from '../../../data-bank/project-stories.json';
@@ -119,7 +118,7 @@ function resolveStory(projectKey) {
   return undefined;
 }
 
-function ProjectBlock({ projectKey, project, onDiscuss }) {
+function ProjectBlock({ projectKey, project, discussHref }) {
   const presentation = PROJECT_PRESENTATION[projectKey];
   const story = resolveStory(projectKey);
   const challenge = [project.context, project.scope, story?.problem].filter(Boolean);
@@ -185,7 +184,7 @@ function ProjectBlock({ projectKey, project, onDiscuss }) {
             variant="outlined"
             endIcon={<ArrowOutwardRoundedIcon />}
             className={styles.discussButton}
-            onClick={onDiscuss}
+            href={discussHref}
           >
             Discuss a similar architecture challenge
           </Button>
@@ -197,7 +196,6 @@ function ProjectBlock({ projectKey, project, onDiscuss }) {
 
 export default function ProjectsPage() {
   const projects = profile.signature_projects;
-  const navigate = useNavigate();
 
   return (
     <Box className={styles.page}>
@@ -220,9 +218,9 @@ export default function ProjectsPage() {
       </Card>
 
       <Box className={styles.grid}>
-        <ProjectBlock projectKey="cargo_web" project={projects.cargo_web} onDiscuss={() => navigate('/contact')} />
-        <ProjectBlock projectKey="platform_consolidation" project={projects.platform_consolidation} onDiscuss={() => navigate('/contact')} />
-        <ProjectBlock projectKey="awtar_ksrtc" project={projects.awtar_ksrtc} onDiscuss={() => navigate('/contact')} />
+        <ProjectBlock projectKey="cargo_web" project={projects.cargo_web} discussHref="/contact" />
+        <ProjectBlock projectKey="platform_consolidation" project={projects.platform_consolidation} discussHref="/contact" />
+        <ProjectBlock projectKey="awtar_ksrtc" project={projects.awtar_ksrtc} discussHref="/contact" />
       </Box>
     </Box>
   );

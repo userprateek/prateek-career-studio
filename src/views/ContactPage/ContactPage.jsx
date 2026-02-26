@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Button, Card, CardContent, Chip, Stack, Typography } from '@mui/material';
 import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import WorkOutlineRoundedIcon from '@mui/icons-material/WorkOutlineRounded';
 
 import site from '../../content/site.json';
@@ -10,15 +9,8 @@ import resume from '../../content/resume.json';
 
 import styles from './ContactPage.module.scss';
 
-function getWhatsAppUrl(phone) {
-  const digits = String(phone || '').replace(/\D/g, '');
-  const text = encodeURIComponent('Hi Prateek, I would like to discuss a Senior Software Engineer / Frontend Engineer opportunity.');
-  return `https://wa.me/${digits}?text=${text}`;
-}
-
 export default function ContactPage() {
   const { contact } = site;
-  const whatsappUrl = getWhatsAppUrl(contact.phone);
 
   return (
     <Box className={styles.page}>
@@ -53,17 +45,6 @@ export default function ContactPage() {
                 <Button
                   className={styles.actionButton}
                   variant="contained"
-                  color="success"
-                  startIcon={<WhatsAppIcon />}
-                  component="a"
-                  href={whatsappUrl}
-                  rel="noopener noreferrer"
-                >
-                  Chat on WhatsApp
-                </Button>
-                <Button
-                  className={styles.actionButton}
-                  variant="outlined"
                   startIcon={<MailOutlineRoundedIcon />}
                   component="a"
                   href={`mailto:${contact.email}`}
@@ -137,7 +118,7 @@ export default function ContactPage() {
             <Box className={styles.responseNote}>
               <Typography variant="subtitle2" sx={{ mb: 0.4 }}>Response expectation</Typography>
               <Typography variant="body2" color="text.secondary">
-                WhatsApp is fastest for initial response. Email is best for sharing detailed JD, scope, and hiring process.
+                Email is the fastest route for hiring discussions and detailed role context. WhatsApp is available through the floating button for quick intros.
               </Typography>
             </Box>
           </CardContent>

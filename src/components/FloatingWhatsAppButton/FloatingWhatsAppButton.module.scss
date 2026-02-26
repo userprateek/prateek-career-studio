@@ -1,0 +1,12 @@
+.whatsappFloat {
+  position: fixed !important;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1300;
+  box-shadow: 0 10px 24px rgba(6, 40, 14, 0.46) !important;
+
+  @media (max-width: 600px) {
+    right: 14px;
+    bottom: 14px;
+  }
+}

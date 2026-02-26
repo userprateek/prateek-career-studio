@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 import {
   Avatar,
   Box,
@@ -21,25 +23,18 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import site from '../../content/site.json';
 import profile from '../../content/profile.json';
 import avatar from '../../assets/profile/prateek-primary.jpg';
-import SeoManager from '../../components/SeoManager/SeoManager';
 
 import styles from './AppLayout.module.scss';
 
-export default function AppLayout() {
-  const location = useLocation();
-  const navigate = useNavigate();
+export default function AppLayout({ children }) {
+  const pathname = usePathname();
   const [open, setOpen] = React.useState(false);
+  const avatarSrc = typeof avatar === 'string' ? avatar : avatar?.src;
 
-  const go = (path) => {
-    setOpen(false);
-    navigate(path);
-  };
-
-  const isRouteActive = (path) => (path === '/' ? location.pathname === '/' : location.pathname.startsWith(path));
+  const isRouteActive = (path) => (path === '/' ? pathname === '/' : pathname.startsWith(path));
 
   return (
     <Box className={styles.root}>
-      <SeoManager />
       <Box className={styles.backgroundPattern} aria-hidden="true" />
 
       <Container maxWidth="xl" className={styles.frame}>
@@ -63,7 +58,7 @@ export default function AppLayout() {
             <Box className={styles.sidebarInner}>
               <Stack spacing={2}>
                 <Avatar
-                  src={avatar}
+                  src={avatarSrc}
                   alt={profile.identity.name}
                   className={styles.profileAvatar}
                   imgProps={{ loading: 'lazy', decoding: 'async' }}
@@ -75,7 +70,7 @@ export default function AppLayout() {
                   </Typography>
                 </Box>
                 <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-                  <Button variant="contained" size="small" onClick={() => go('/contact')}>
+                  <Button variant="contained" size="small" href="/contact">
                     Hire Prateek
                   </Button>
                   <Button
@@ -99,7 +94,7 @@ export default function AppLayout() {
                     key={route.path}
                     variant={isRouteActive(route.path) ? 'contained' : 'text'}
                     color={isRouteActive(route.path) ? 'primary' : 'inherit'}
-                    onClick={() => go(route.path)}
+                    href={route.path}
                     className={styles.navButton}
                   >
                     {route.label}
@@ -110,14 +105,14 @@ export default function AppLayout() {
           </Card>
 
           <Box component="main" className={styles.contentColumn}>
-            <Outlet />
+            {children}
           </Box>
         </Box>
 
         <Card variant="outlined" className={styles.mobileProfileCard} data-nosnippet>
           <Stack spacing={1.2} direction="row" alignItems="center">
             <Avatar
-              src={avatar}
+              src={avatarSrc}
               alt={profile.identity.name}
               className={styles.mobileAvatar}
               imgProps={{ loading: 'lazy', decoding: 'async' }}
@@ -135,7 +130,7 @@ export default function AppLayout() {
 
         <Box component="footer" className={styles.footer} data-nosnippet>
           <Typography variant="body2" color="text.secondary">
-            © {new Date().getFullYear()} {profile.identity.name}
+            <span suppressHydrationWarning>© {new Date().getFullYear()}</span> {profile.identity.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Built with React + MUI
@@ -151,7 +146,12 @@ export default function AppLayout() {
           <List disablePadding sx={{ mt: 1 }}>
             {site.routes.map((r) => (
               <ListItem key={r.path} disablePadding>
-                <ListItemButton selected={isRouteActive(r.path)} onClick={() => go(r.path)}>
+                <ListItemButton
+                  selected={isRouteActive(r.path)}
+                  onClick={() => setOpen(false)}
+                  component="a"
+                  href={r.path}
+                >
                   <ListItemText primary={r.label} />
                 </ListItemButton>
               </ListItem>
