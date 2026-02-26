@@ -1,9 +1,6 @@
 import React from 'react';
-import { Box, Button, Card, CardContent, Chip, Stack, Typography } from '@mui/material';
-import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import WorkOutlineRoundedIcon from '@mui/icons-material/WorkOutlineRounded';
 
+import { Button, Card, CardContent, Chip, IconLinkedIn, IconMail, IconWork } from '../../components/ui/Primitives';
 import site from '../../content/site.json';
 import resume from '../../content/resume.json';
 
@@ -13,117 +10,102 @@ export default function ContactPage() {
   const { contact } = site;
 
   return (
-    <Box className={styles.page}>
-      <Box className={styles.header}>
-        <Typography component="h1" variant="h2">Contact</Typography>
-        <Typography variant="body1" color="text.secondary">
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <h1 className={styles.pageTitle}>Contact</h1>
+        <p className={styles.pageLead}>
           Open to full-time roles, consulting, and product collaborations that need hands-on frontend systems ownership and reliable execution.
-        </Typography>
-      </Box>
+        </p>
+      </header>
 
-      <Box className={styles.grid}>
-        <Card variant="outlined" className={styles.primaryCard}>
+      <div className={styles.grid}>
+        <Card className={styles.primaryCard}>
           <CardContent>
-            <Stack spacing={1.5}>
-              <Typography variant="h3">Hiring quick view</Typography>
-              <Typography variant="body2" color="text.secondary">
+            <div className={styles.block}>
+              <h3 className={styles.sectionTitle}>Hiring quick view</h3>
+              <p className={styles.pageLead}>
                 Best fit: teams modernizing complex workflows and looking for production-grade frontend engineering with dependable ownership.
-              </Typography>
-              <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-                {resume.availability.full_time && <Chip label="Full-time" className={styles.availabilityChip} />}
-                {resume.availability.freelance && <Chip label="Freelance" className={styles.availabilityChip} />}
-                {resume.availability.remote && <Chip label="Remote" className={styles.availabilityChip} />}
-              </Stack>
+              </p>
+              <div className={styles.chipRow}>
+                {resume.availability.full_time ? <Chip className={styles.availabilityChip}>Full-time</Chip> : null}
+                {resume.availability.freelance ? <Chip className={styles.availabilityChip}>Freelance</Chip> : null}
+                {resume.availability.remote ? <Chip className={styles.availabilityChip}>Remote</Chip> : null}
+              </div>
 
-              <Typography variant="body2" color="text.secondary" sx={{ mt: 0.4 }}>
+              <p className={styles.pageLead}>
                 <strong>Email:</strong> {contact.email}
                 <br />
                 <strong>Phone:</strong> {contact.phone}
-              </Typography>
+              </p>
 
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
-                <Button
-                  className={styles.actionButton}
-                  variant="contained"
-                  startIcon={<MailOutlineRoundedIcon />}
-                  component="a"
-                  href={`mailto:${contact.email}`}
-                >
+              <div className={styles.buttonRow}>
+                <Button className={styles.actionButton} variant="contained" startIcon={<IconMail />} href={`mailto:${contact.email}`}>
                   Send email
                 </Button>
-              </Stack>
-            </Stack>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
-        <Card variant="outlined">
+        <Card>
           <CardContent>
-            <Typography variant="h3" sx={{ mb: 1.4 }}>Contact channels</Typography>
-            <Stack spacing={1}>
+            <h3 className={styles.sectionTitle}>Contact channels</h3>
+            <div className={styles.buttonCol}>
               <Button
                 className={styles.actionButton}
                 variant="outlined"
-                startIcon={<LinkedInIcon />}
-                component="a"
+                startIcon={<IconLinkedIn />}
                 href={contact.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Open LinkedIn
               </Button>
-              {contact.wellfound && (
+              {contact.wellfound ? (
                 <Button
                   className={styles.actionButton}
                   variant="outlined"
-                  startIcon={<WorkOutlineRoundedIcon />}
-                  component="a"
+                  startIcon={<IconWork />}
                   href={contact.wellfound}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Open Wellfound
                 </Button>
-              )}
-              <Button
-                className={styles.actionButton}
-                variant="outlined"
-                component="a"
-                href={`tel:${contact.phone}`}
-              >
+              ) : null}
+              <Button className={styles.actionButton} variant="outlined" href={`tel:${contact.phone}`}>
                 Call phone
               </Button>
-            </Stack>
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 1.2 }}>
-              WhatsApp business number: {contact.phone}
-            </Typography>
+            </div>
+            <p className={styles.pageLead}>WhatsApp business number: {contact.phone}</p>
           </CardContent>
         </Card>
 
-        <Card variant="outlined" className={styles.full}>
+        <Card className={styles.full}>
           <CardContent>
-            <Typography variant="h3" sx={{ mb: 1.2 }}>How to reach out</Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 1.6 }}>
+            <h3 className={styles.sectionTitle}>How to reach out</h3>
+            <p className={styles.pageLead}>
               Share role context, expected ownership level, and delivery timeline. Responses are prioritized for active hiring discussions.
-            </Typography>
-            <Box className={styles.messageGuide}>
-              <Typography variant="subtitle2" sx={{ mb: 0.7 }}>Helpful first message format</Typography>
-              <Stack spacing={0.7}>
-                <Typography variant="body2">• Company and team context</Typography>
-                <Typography variant="body2">• Product/workflow complexity you need help with</Typography>
-                <Typography variant="body2">• Ownership expectation: hands-on IC scope or a blended IC-plus-team coordination scope</Typography>
-                <Typography variant="body2">• Hiring timeline and interview process</Typography>
-              </Stack>
-            </Box>
+            </p>
+            <div className={styles.messageGuide}>
+              <p className={styles.groupName}>Helpful first message format</p>
+              <div className={styles.bullets}>
+                <p>• Company and team context</p>
+                <p>• Product/workflow complexity you need help with</p>
+                <p>• Ownership expectation: hands-on IC scope or a blended IC-plus-team coordination scope</p>
+                <p>• Hiring timeline and interview process</p>
+              </div>
+            </div>
 
-            <Box className={styles.responseNote}>
-              <Typography variant="subtitle2" sx={{ mb: 0.4 }}>Response expectation</Typography>
-              <Typography variant="body2" color="text.secondary">
+            <div className={styles.responseNote}>
+              <p className={styles.groupName}>Response expectation</p>
+              <p className={styles.pageLead}>
                 Email is the fastest route for hiring discussions and detailed role context. WhatsApp is available through the floating button for quick intros.
-              </Typography>
-            </Box>
+              </p>
+            </div>
           </CardContent>
         </Card>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }

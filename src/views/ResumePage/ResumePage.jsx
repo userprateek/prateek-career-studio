@@ -1,8 +1,6 @@
 import React from 'react';
-import { Box, Button, Card, CardContent, Chip, Divider, Stack, Typography } from '@mui/material';
-import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
-import ArrowOutwardRoundedIcon from '@mui/icons-material/ArrowOutwardRounded';
 
+import { Button, Card, CardContent, Chip, IconDownload, IconExternal } from '../../components/ui/Primitives';
 import resume from '../../content/resume.json';
 
 import styles from './ResumePage.module.scss';
@@ -50,172 +48,157 @@ export default function ResumePage() {
   const years = totalExperienceYears(resume.experience);
 
   return (
-    <Box className={styles.page}>
-      <Box className={styles.header}>
-        <Typography component="h1" variant="h2">Resume overview</Typography>
-        <Typography variant="body1" color="text.secondary">
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <h1 className={styles.pageTitle}>Resume overview</h1>
+        <p className={styles.pageLead}>
           Fast hiring scan of experience, skills, and delivery evidence sourced from resume databank content.
-        </Typography>
-      </Box>
+        </p>
+      </header>
 
-      <Card variant="outlined" className={styles.full}>
+      <Card className={styles.full}>
         <CardContent>
-          <Typography variant="h3" sx={{ mb: 1.1 }}>Hiring snapshot</Typography>
-          <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mb: 1.3 }}>
-            <Chip label={`${years}+ years delivery experience`} className={styles.availabilityChip} />
-            <Chip label={`${resume.selected_projects.length} featured project impacts`} className={styles.availabilityChip} />
-            <Chip label="React/Next.js architecture + API coordination" className={styles.availabilityChip} />
-            <Chip label="Hands-on + end-to-end ownership" className={styles.availabilityChip} />
-          </Stack>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 1.6 }}>
+          <h3 className={styles.sectionTitle}>Hiring snapshot</h3>
+          <div className={styles.chipRow}>
+            <Chip className={styles.availabilityChip}>{`${years}+ years delivery experience`}</Chip>
+            <Chip className={styles.availabilityChip}>{`${resume.selected_projects.length} featured project impacts`}</Chip>
+            <Chip className={styles.availabilityChip}>React/Next.js architecture + API coordination</Chip>
+            <Chip className={styles.availabilityChip}>Hands-on + end-to-end ownership</Chip>
+          </div>
+          <p className={styles.pageLead}>
             Strong fit for roles that need engineering maturity, systems ownership, and reliable hands-on execution.
-          </Typography>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} useFlexGap flexWrap="wrap">
+          </p>
+          <div className={styles.actionRow}>
             <Button
               variant="contained"
-              startIcon={<DownloadRoundedIcon />}
-              component="a"
+              startIcon={<IconDownload />}
               href={RESUME_PDF_PATH}
               download
               disabled={!HAS_RESUME_PDF}
             >
               Download PDF resume
             </Button>
-            <Button variant="outlined" endIcon={<ArrowOutwardRoundedIcon />} href="/contact">
+            <Button variant="outlined" endIcon={<IconExternal />} href="/contact">
               Start hiring conversation
             </Button>
-          </Stack>
+          </div>
         </CardContent>
       </Card>
 
-      <Box className={styles.grid}>
-        <Card variant="outlined" className={styles.summaryCard}>
+      <div className={styles.grid}>
+        <Card className={styles.summaryCard}>
           <CardContent>
-            <Typography variant="h3" sx={{ mb: 1.25 }}>Professional summary</Typography>
-            <Stack spacing={0.75}>
+            <h3 className={styles.sectionTitle}>Professional summary</h3>
+            <div className={styles.bulletsMuted}>
               {resume.summary.map((line) => (
-                <Typography key={line} variant="body2" color="text.secondary">
-                  • {line}
-                </Typography>
+                <p key={line}>• {line}</p>
               ))}
-            </Stack>
+            </div>
           </CardContent>
         </Card>
 
-        <Card variant="outlined" className={styles.summaryCard}>
+        <Card className={styles.summaryCard}>
           <CardContent>
-            <Typography variant="h3" sx={{ mb: 1.25 }}>Availability</Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 1.2 }}>
+            <h3 className={styles.sectionTitle}>Availability</h3>
+            <p className={styles.pageLead}>
               Available for full-time roles, consulting, and remote collaboration across senior IC scopes that value ownership and reliability.
-            </Typography>
-            <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-              {resume.availability?.full_time && <Chip label="Full-time" className={styles.availabilityChip} />}
-              {resume.availability?.freelance && <Chip label="Freelance" className={styles.availabilityChip} />}
-              {resume.availability?.remote && <Chip label="Remote" className={styles.availabilityChip} />}
-            </Stack>
+            </p>
+            <div className={styles.chipRow}>
+              {resume.availability?.full_time ? <Chip className={styles.availabilityChip}>Full-time</Chip> : null}
+              {resume.availability?.freelance ? <Chip className={styles.availabilityChip}>Freelance</Chip> : null}
+              {resume.availability?.remote ? <Chip className={styles.availabilityChip}>Remote</Chip> : null}
+            </div>
           </CardContent>
         </Card>
 
-        <Card variant="outlined" className={styles.full}>
+        <Card className={styles.full}>
           <CardContent>
-            <Typography variant="h3" sx={{ mb: 2 }}>Experience timeline</Typography>
-            <Box className={styles.timeline}>
+            <h3 className={styles.sectionTitle}>Experience timeline</h3>
+            <div className={styles.timeline}>
               {resume.experience.map((job, index) => (
-                <Box key={`${job.company}-${job.role}`} className={styles.timelineItem}>
-                  <Box className={styles.dot} aria-hidden="true" />
-                  <Box>
-                    <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} justifyContent="space-between">
-                      <Box>
-                        <Typography variant="subtitle1" sx={{ fontWeight: 760 }}>
-                          {job.role}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {job.company} • {job.location}
-                        </Typography>
-                      </Box>
-                      <Typography variant="body2" color="text.secondary" sx={{ whiteSpace: 'nowrap' }}>
-                        {ymLabel(job.start)} — {job.end === 'Present' ? 'Present' : ymLabel(job.end)}
-                      </Typography>
-                    </Stack>
+                <div key={`${job.company}-${job.role}`} className={styles.timelineItem}>
+                  <div className={styles.dot} aria-hidden="true" />
+                  <div>
+                    <div className={styles.timelineHeader}>
+                      <div>
+                        <p className={styles.role}>{job.role}</p>
+                        <p className={styles.pageLead}>{job.company} • {job.location}</p>
+                      </div>
+                      <p className={styles.pageLead}>{ymLabel(job.start)} — {job.end === 'Present' ? 'Present' : ymLabel(job.end)}</p>
+                    </div>
 
-                    <Stack spacing={0.7} sx={{ mt: 1.1 }}>
+                    <div className={styles.bullets}>
                       {job.highlights.map((point) => (
-                        <Typography key={point} variant="body2">
-                          • {point}
-                        </Typography>
+                        <p key={point}>• {point}</p>
                       ))}
-                    </Stack>
+                    </div>
 
-                    <Stack direction="row" spacing={0.8} useFlexGap flexWrap="wrap" sx={{ mt: 1.1 }}>
+                    <div className={styles.chipRow}>
                       {job.stack.map((tech) => (
-                        <Chip key={tech} label={tech} size="small" variant="outlined" className={styles.stackChip} />
+                        <Chip key={tech} className={styles.stackChip}>{tech}</Chip>
                       ))}
-                    </Stack>
+                    </div>
 
-                    {index !== resume.experience.length - 1 && <Divider sx={{ mt: 2.1, borderColor: 'rgba(255,255,255,0.1)' }} />}
-                  </Box>
-                </Box>
+                    {index !== resume.experience.length - 1 ? <hr className={styles.divider} /> : null}
+                  </div>
+                </div>
               ))}
-            </Box>
+            </div>
           </CardContent>
         </Card>
 
-        <Card variant="outlined" className={styles.full}>
+        <Card className={styles.full}>
           <CardContent>
-            <Typography variant="h3" sx={{ mb: 1.25 }}>Selected project impact</Typography>
-            <Stack spacing={0.85}>
+            <h3 className={styles.sectionTitle}>Selected project impact</h3>
+            <div className={styles.bulletsMuted}>
               {resume.selected_projects.map((item) => (
-                <Typography key={item.name} variant="body2" color="text.secondary">
-                  <strong>{item.name}:</strong> {item.impact}
-                </Typography>
+                <p key={item.name}><strong>{item.name}:</strong> {item.impact}</p>
               ))}
-            </Stack>
+            </div>
           </CardContent>
         </Card>
 
-        <Card variant="outlined" className={styles.full}>
+        <Card className={styles.full}>
           <CardContent>
-            <Typography variant="h3" sx={{ mb: 1.25 }}>Skill groups</Typography>
-            <Box className={styles.skillGroups}>
+            <h3 className={styles.sectionTitle}>Skill groups</h3>
+            <div className={styles.skillGroups}>
               {Object.entries(grouped).map(([groupName, list]) => (
-                <Box key={groupName} className={styles.skillGroupCard}>
-                  <Typography variant="subtitle2" sx={{ mb: 1 }}>{groupName}</Typography>
-                  <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
+                <div key={groupName} className={styles.skillGroupCard}>
+                  <p className={styles.groupName}>{groupName}</p>
+                  <div className={styles.chipRow}>
                     {list.map((skill) => (
-                      <Chip key={skill} label={skill} className={styles.skillChip} />
+                      <Chip key={skill} className={styles.skillChip}>{skill}</Chip>
                     ))}
-                  </Stack>
-                </Box>
+                  </div>
+                </div>
               ))}
-            </Box>
+            </div>
           </CardContent>
         </Card>
 
-        <Card variant="outlined">
+        <Card>
           <CardContent>
-            <Typography variant="h3" sx={{ mb: 1.2 }}>Education</Typography>
+            <h3 className={styles.sectionTitle}>Education</h3>
             {resume.education.map((edu) => (
-              <Box key={edu.school}>
-                <Typography variant="subtitle1">{edu.degree}</Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {edu.school} ({edu.start}–{edu.end})
-                </Typography>
-              </Box>
+              <div key={edu.school}>
+                <p className={styles.role}>{edu.degree}</p>
+                <p className={styles.pageLead}>{edu.school} ({edu.start}-{edu.end})</p>
+              </div>
             ))}
           </CardContent>
         </Card>
 
-        <Card variant="outlined">
+        <Card>
           <CardContent>
-            <Typography variant="h3" sx={{ mb: 1.2 }}>Languages</Typography>
-            <Stack spacing={0.7}>
+            <h3 className={styles.sectionTitle}>Languages</h3>
+            <div className={styles.bullets}>
               {resume.languages.map((lang) => (
-                <Typography key={lang.name} variant="body2">• {lang.name} — {lang.level}</Typography>
+                <p key={lang.name}>• {lang.name} — {lang.level}</p>
               ))}
-            </Stack>
+            </div>
           </CardContent>
         </Card>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }

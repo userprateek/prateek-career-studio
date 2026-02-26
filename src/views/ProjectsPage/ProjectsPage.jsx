@@ -1,16 +1,7 @@
 import React from 'react';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Chip,
-  Divider,
-  Stack,
-  Typography
-} from '@mui/material';
-import ArrowOutwardRoundedIcon from '@mui/icons-material/ArrowOutwardRounded';
+import Image from 'next/image';
 
+import { Button, Card, CardContent, Chip, IconExternal } from '../../components/ui/Primitives';
 import profile from '../../content/profile.json';
 import projectStories from '../../../data-bank/project-stories.json';
 
@@ -82,30 +73,21 @@ function StorySection({ label, items }) {
   if (!items?.length) return null;
 
   return (
-    <Box className={styles.storySection}>
-      <Typography variant="overline" color="text.secondary" className={styles.sectionLabel}>
-        {label}
-      </Typography>
-      <Stack spacing={0.65} sx={{ mt: 0.45 }}>
+    <section className={styles.storySection}>
+      <p className={styles.sectionLabel}>{label}</p>
+      <div className={styles.storyBullets}>
         {items.map((item) => (
-          <Typography key={item} variant="body2">
-            • {item}
-          </Typography>
+          <p key={item}>• {item}</p>
         ))}
-      </Stack>
-    </Box>
+      </div>
+    </section>
   );
 }
 
 function ProjectVisualSlot({ slot }) {
   return (
     <figure className={styles.visualSlot}>
-      <img
-        src={slot.src}
-        alt={slot.caption}
-        loading="lazy"
-        decoding="async"
-      />
+      <Image src={slot.src} alt={slot.caption} width={1200} height={750} sizes="(max-width: 860px) 100vw, 50vw" />
       <figcaption>{slot.caption}</figcaption>
     </figure>
   );
@@ -126,69 +108,48 @@ function ProjectBlock({ projectKey, project, discussHref }) {
   const outcomes = uniqueBullets([...(project.outcomes ?? []), ...(project.result ?? []), ...(story?.outcomes ?? [])]);
 
   return (
-    <Card variant="outlined" className={styles.card}>
+    <Card className={styles.card}>
       <CardContent>
-        <Stack spacing={1.8}>
-          <Box className={styles.titleRow}>
-            <Box>
-              <Typography variant="h3">{presentation.title}</Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ mt: 0.25 }}>
-                {presentation.subtitle}
-              </Typography>
-            </Box>
-            {project.status && <Chip size="small" label={project.status} color="primary" className={styles.badgeChip} />}
-          </Box>
+        <div className={styles.block}>
+          <div className={styles.titleRow}>
+            <div>
+              <h3 className={styles.title}>{presentation.title}</h3>
+              <p className={styles.subtitle}>{presentation.subtitle}</p>
+            </div>
+            {project.status ? <Chip tone="primary" className={styles.badgeChip}>{project.status}</Chip> : null}
+          </div>
 
-          {(presentation.about || story?.elevator_pitch) && (
-            <Typography variant="body2" className={styles.elevatorPitch}>
-              {presentation.about || story?.elevator_pitch}
-            </Typography>
-          )}
+          {presentation.about || story?.elevator_pitch ? <p className={styles.elevatorPitch}>{presentation.about || story?.elevator_pitch}</p> : null}
 
-          {project.system_role && (
-            <Typography variant="body2" color="text.secondary">
-              <strong>Role:</strong> {project.system_role}
-            </Typography>
-          )}
+          {project.system_role ? <p className={styles.meta}><strong>Role:</strong> {project.system_role}</p> : null}
 
-          <Box className={styles.scanRow}>
-            <Chip size="small" label={`${decisions.length || 1} technical decisions`} className={styles.infoChip} />
-            <Chip size="small" label={`${outcomes.length || 1} outcomes`} className={styles.infoChip} />
-            {project.durability && <Chip size="small" label="Long-term durability" className={styles.infoChip} />}
-            {story?.best_for_roles?.[0] && <Chip size="small" label={`Best fit: ${story.best_for_roles[0]}`} className={styles.infoChip} />}
-          </Box>
+          <div className={styles.scanRow}>
+            <Chip className={styles.infoChip}>{`${decisions.length || 1} technical decisions`}</Chip>
+            <Chip className={styles.infoChip}>{`${outcomes.length || 1} outcomes`}</Chip>
+            {project.durability ? <Chip className={styles.infoChip}>Long-term durability</Chip> : null}
+            {story?.best_for_roles?.[0] ? <Chip className={styles.infoChip}>{`Best fit: ${story.best_for_roles[0]}`}</Chip> : null}
+          </div>
 
-          <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)' }} />
+          <hr className={styles.divider} />
 
-          <Box className={styles.detailGrid}>
+          <div className={styles.detailGrid}>
             <StorySection label="Context" items={challenge} />
             <StorySection label="Approach" items={decisions} />
             <StorySection label="Results" items={outcomes} />
-          </Box>
+          </div>
 
-          {project.durability && (
-            <Typography variant="body2" color="text.secondary">
-              <strong>Durability:</strong> {project.durability}
-            </Typography>
-          )}
+          {project.durability ? <p className={styles.meta}><strong>Durability:</strong> {project.durability}</p> : null}
 
-          <Box>
-            <Box className={styles.visualGrid}>
-              {presentation.visualSlots.map((slot) => (
-                <ProjectVisualSlot key={slot.src} slot={slot} />
-              ))}
-            </Box>
-          </Box>
+          <div className={styles.visualGrid}>
+            {presentation.visualSlots.map((slot) => (
+              <ProjectVisualSlot key={slot.src} slot={slot} />
+            ))}
+          </div>
 
-          <Button
-            variant="outlined"
-            endIcon={<ArrowOutwardRoundedIcon />}
-            className={styles.discussButton}
-            href={discussHref}
-          >
+          <Button variant="outlined" endIcon={<IconExternal />} className={styles.discussButton} href={discussHref}>
             Discuss a similar architecture challenge
           </Button>
-        </Stack>
+        </div>
       </CardContent>
     </Card>
   );
@@ -198,30 +159,30 @@ export default function ProjectsPage() {
   const projects = profile.signature_projects;
 
   return (
-    <Box className={styles.page}>
-      <Box className={styles.header}>
-        <Typography component="h1" variant="h2">Project case studies</Typography>
-        <Typography variant="body1" color="text.secondary">
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <h1 className={styles.pageTitle}>Project case studies</h1>
+        <p className={styles.pageLead}>
           Databank-grounded portfolio stories showing business context, architecture and product decisions, and measurable delivery outcomes.
-        </Typography>
-      </Box>
+        </p>
+      </header>
 
-      <Card variant="outlined" className={styles.scanGuide}>
+      <Card className={styles.scanGuide}>
         <CardContent>
-          <Typography variant="h3" sx={{ mb: 1.2 }}>How to scan these case studies quickly</Typography>
-          <Stack spacing={0.8}>
-            <Typography variant="body2" color="text.secondary">• Start with <strong>Context</strong> to see business constraints and scale.</Typography>
-            <Typography variant="body2" color="text.secondary">• Use <strong>Approach</strong> to understand architecture and ownership judgment.</Typography>
-            <Typography variant="body2" color="text.secondary">• Validate with <strong>Results</strong> and visual evidence for delivery credibility.</Typography>
-          </Stack>
+          <h3 className={styles.title}>How to scan these case studies quickly</h3>
+          <div className={styles.storyBullets}>
+            <p>• Start with <strong>Context</strong> to see business constraints and scale.</p>
+            <p>• Use <strong>Approach</strong> to understand architecture and ownership judgment.</p>
+            <p>• Validate with <strong>Results</strong> and visual evidence for delivery credibility.</p>
+          </div>
         </CardContent>
       </Card>
 
-      <Box className={styles.grid}>
+      <div className={styles.grid}>
         <ProjectBlock projectKey="cargo_web" project={projects.cargo_web} discussHref="/contact" />
         <ProjectBlock projectKey="platform_consolidation" project={projects.platform_consolidation} discussHref="/contact" />
         <ProjectBlock projectKey="awtar_ksrtc" project={projects.awtar_ksrtc} discussHref="/contact" />
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }

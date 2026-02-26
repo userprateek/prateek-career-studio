@@ -8,6 +8,17 @@
   gap: 8px;
 }
 
+.pageTitle {
+  margin: 0;
+  font-size: clamp(1.7rem, 4vw, 2.7rem);
+  line-height: 1.16;
+}
+
+.pageLead {
+  margin: 0;
+  color: #b7c3d8;
+}
+
 .grid {
   display: grid;
   gap: 14px;
@@ -26,11 +37,31 @@
   grid-column: 1 / -1;
 }
 
+.sectionTitle {
+  margin: 0 0 12px;
+  font-size: clamp(1.2rem, 2.3vw, 1.62rem);
+}
+
 .availabilityChip {
   background: rgba(115, 217, 255, 0.2) !important;
   border: 1px solid rgba(115, 217, 255, 0.5) !important;
   color: #eef8ff !important;
   font-weight: 650 !important;
+}
+
+.chipRow,
+.actionRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chipRow {
+  margin-bottom: 12px;
+}
+
+.actionRow {
+  margin-top: 12px;
 }
 
 .timeline {
@@ -45,6 +76,14 @@
   gap: 10px;
 }
 
+.timelineHeader {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
 .dot {
   width: 12px;
   height: 12px;
@@ -54,9 +93,37 @@
   box-shadow: 0 0 0 4px rgba(115, 217, 255, 0.2);
 }
 
+.role {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 760;
+}
+
+.bullets,
+.bulletsMuted {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.bullets p,
+.bulletsMuted p {
+  margin: 0;
+}
+
+.bulletsMuted p {
+  color: #b7c3d8;
+}
+
 .stackChip {
   border-color: rgba(115, 217, 255, 0.3) !important;
   color: #dcebff !important;
+}
+
+.divider {
+  margin-top: 14px;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .skillGroups {
@@ -74,6 +141,12 @@
   border: 1px solid rgba(255, 255, 255, 0.11);
   border-radius: 12px;
   background: rgba(7, 13, 24, 0.52);
+}
+
+.groupName {
+  margin: 0 0 10px;
+  font-size: 0.92rem;
+  font-weight: 620;
 }
 
 .skillChip {

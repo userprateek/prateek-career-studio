@@ -1,11 +1,27 @@
 .whatsappFloat {
-  position: fixed !important;
+  position: fixed;
   right: 18px;
   bottom: 18px;
   z-index: 1300;
-  box-shadow: 0 10px 24px rgba(6, 40, 14, 0.46) !important;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #02160a;
+  background: #5ed167;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 24px rgba(6, 40, 14, 0.46);
+  transition: transform 160ms ease;
+}
 
-  @media (max-width: 600px) {
+.whatsappFloat:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .whatsappFloat {
     right: 14px;
     bottom: 14px;
   }

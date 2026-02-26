@@ -2,11 +2,9 @@ import React from 'react';
 
 import AppLayout from '../src/layouts/AppLayout/AppLayout';
 import FloatingWhatsAppButton from '../src/components/FloatingWhatsAppButton/FloatingWhatsAppButton';
-import ThemeRegistry from '../src/components/ThemeRegistry/ThemeRegistry';
 import profile from '../src/content/profile.json';
 import resume from '../src/content/resume.json';
 import seo from '../src/content/seo.json';
-import site from '../src/content/site.json';
 
 import '../src/styles/global.scss';
 
@@ -53,7 +51,6 @@ function buildSchema() {
         name: profile.identity.name,
         jobTitle: seo.person_job_title,
         description: seo.person_description,
-        email: `mailto:${site.contact.email}`,
         url: seo.site_url,
         image: `${seo.site_url}${seo.default_image}`,
         sameAs: seo.same_as,
@@ -82,10 +79,8 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(buildSchema()) }}
         />
-        <ThemeRegistry>
-          <AppLayout>{children}</AppLayout>
-          <FloatingWhatsAppButton />
-        </ThemeRegistry>
+        <AppLayout>{children}</AppLayout>
+        <FloatingWhatsAppButton />
       </body>
     </html>
   );

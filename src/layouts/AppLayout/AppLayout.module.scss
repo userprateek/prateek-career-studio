@@ -10,31 +10,20 @@
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(1200px 700px at 8% -10%, rgba(115, 217, 255, 0.14), transparent 62%),
-    radial-gradient(900px 620px at 97% 0%, rgba(177, 140, 255, 0.13), transparent 58%),
-    radial-gradient(circle at 12% 74%, rgba(39, 90, 131, 0.2), transparent 42%),
-    linear-gradient(130deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(50deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    radial-gradient(1100px 520px at 8% -10%, rgba(115, 217, 255, 0.12), transparent 62%),
+    radial-gradient(760px 500px at 97% 0%, rgba(177, 140, 255, 0.1), transparent 58%),
     #070b13;
-  background-size:
-    auto,
-    auto,
-    auto,
-    54px 54px,
-    46px 46px,
-    auto;
-  background-position:
-    center,
-    center,
-    center,
-    0 0,
-    10px 24px,
-    center;
 }
 
 .frame {
-  padding-top: clamp(18px, 2.7vw, 30px);
-  padding-bottom: clamp(24px, 4vw, 44px);
+  max-width: 1536px;
+  margin: 0 auto;
+  padding: clamp(18px, 2.7vw, 30px) 16px clamp(24px, 4vw, 44px);
+
+  @media (min-width: 600px) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
 
 .mobileTopBar {
@@ -43,8 +32,7 @@
   padding: 10px 14px;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.11);
-  background: rgba(8, 14, 26, 0.72);
-  backdrop-filter: blur(9px);
+  background: rgba(8, 14, 26, 0.82);
 
   @media (max-width: 959px) {
     display: flex;
@@ -82,33 +70,43 @@
   gap: 18px;
 }
 
+.profileTop {
+  display: grid;
+  gap: 14px;
+}
+
+.name {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.3vw, 1.62rem);
+  line-height: 1.24;
+}
+
+.subtle {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #b7c3d8;
+}
+
 .profileAvatar {
-  width: 94px !important;
-  height: 94px !important;
-  overflow: hidden;
+  border-radius: 999px;
   background: rgba(9, 16, 29, 0.88);
   border: 2px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 20px rgba(2, 8, 19, 0.34);
-
-  img {
-    object-fit: cover;
-    object-position: 50% 20%;
-    transform: scale(1.04);
-  }
+  object-fit: cover;
+  object-position: 50% 20%;
 }
 
-.mobileAvatar {
-  width: 58px !important;
-  height: 58px !important;
-  overflow: hidden;
-  background: rgba(9, 16, 29, 0.88);
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
+.actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
 
-  img {
-    object-fit: cover;
-    object-position: 50% 20%;
-    transform: scale(1.04);
-  }
+.divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0;
 }
 
 .desktopNav {
@@ -136,6 +134,26 @@
   }
 }
 
+.mobileProfileInner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobileAvatar {
+  border-radius: 999px;
+  background: rgba(9, 16, 29, 0.88);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+
+.mobileName {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 .footer {
   margin-top: clamp(20px, 3vw, 32px);
   padding-top: 16px;
@@ -151,12 +169,70 @@
 }
 
 .brandKicker {
+  margin: 0;
   letter-spacing: 0.16em;
   color: rgba(255, 255, 255, 0.58);
   line-height: 1;
+  font-size: 0.72rem;
+  text-transform: uppercase;
 }
 
 .brand {
-  font-weight: 780;
+  margin: 5px 0 0;
+  font-size: 1.25rem;
   line-height: 1.2;
+  font-weight: 760;
+}
+
+.mobileNav {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: min(290px, 82vw);
+  max-height: 100vh;
+  z-index: 1300;
+  border-radius: 0 0 0 12px;
+  background: rgba(14, 22, 37, 0.96);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+
+  @media (min-width: 960px) {
+    display: none;
+  }
+}
+
+.mobileNavToggle {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.92rem;
+  font-weight: 620;
+}
+
+.mobileNavToggle::-webkit-details-marker {
+  display: none;
+}
+
+.mobileNav:not([open]) .drawerNav {
+  display: none;
+}
+
+.drawerNav {
+  padding: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.drawerLink {
+  color: #d7ebff;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 9px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
 }

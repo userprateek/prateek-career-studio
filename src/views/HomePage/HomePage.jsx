@@ -1,37 +1,20 @@
 import React from 'react';
-import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Chip,
-  Stack,
-  Typography
-} from '@mui/material';
-import ArrowOutwardRoundedIcon from '@mui/icons-material/ArrowOutwardRounded';
-import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
+import Image from 'next/image';
 
+import { Button, Card, CardContent, Chip, IconExternal, IconMail } from '../../components/ui/Primitives';
 import profile from '../../content/profile.json';
 import resume from '../../content/resume.json';
-import site from '../../content/site.json';
 import primaryPhoto from '../../assets/profile/prateek-primary.jpg';
 
 import styles from './HomePage.module.scss';
 
 function MetricCard({ label, value, detail }) {
   return (
-    <Card variant="outlined" className={styles.metricCard}>
+    <Card className={styles.metricCard}>
       <CardContent>
-        <Typography variant="h3">{value}</Typography>
-        <Typography variant="subtitle2" sx={{ mt: 0.6 }}>
-          {label}
-        </Typography>
-        {detail && (
-          <Typography variant="body2" color="text.secondary" sx={{ mt: 0.8 }}>
-            {detail}
-          </Typography>
-        )}
+        <h3 className={styles.metricValue}>{value}</h3>
+        <p className={styles.metricLabel}>{label}</p>
+        {detail ? <p className={styles.metricDetail}>{detail}</p> : null}
       </CardContent>
     </Card>
   );
@@ -49,11 +32,6 @@ function monthDiff(startYm, endYm) {
 
 export default function HomePage() {
   const { identity, signature_projects } = profile;
-  const profilePhotoSrc = typeof primaryPhoto === 'string' ? primaryPhoto : primaryPhoto?.src;
-
-  const heroStyle = site.design?.hero_background_image
-    ? { '--hero-bg': `url(${site.design.hero_background_image})` }
-    : undefined;
 
   const totalMonths = resume.experience.reduce((sum, job) => sum + monthDiff(job.start, job.end), 0);
   const years = Math.max(1, Math.floor(totalMonths / 12));
@@ -104,141 +82,116 @@ export default function HomePage() {
   ];
 
   return (
-    <Box className={styles.page}>
-      <Card variant="outlined" className={styles.hero} style={heroStyle}>
-        <Box className={styles.heroOverlay}>
-          <Box className={styles.heroContent}>
-            <Stack spacing={2.2} className={styles.fadeUp}>
-              <Chip label="Open to full-time and freelance roles" color="primary" className={styles.availabilityBanner} />
+    <div className={styles.page}>
+      <Card className={styles.hero}>
+        <div className={styles.heroOverlay}>
+          <div className={styles.heroContent}>
+            <div className={styles.fadeUp}>
+              <Chip tone="primary" className={styles.availabilityBanner}>Open to full-time and freelance roles</Chip>
 
-              <Typography component="h1" variant="h1">Prateek Kumar - Senior Software Engineer | Frontend Engineer</Typography>
+              <h1 className={styles.heroTitle}>Prateek Kumar - Senior Software Engineer | Frontend Engineer</h1>
 
-              <Typography variant="h2" className={styles.headline}>
-                {identity.positioning}
-              </Typography>
+              <h2 className={styles.headline}>{identity.positioning}</h2>
 
-              <Typography variant="body1" className={styles.heroLead}>
+              <p className={styles.heroLead}>
                 I build scalable, production-grade web systems using React.js and Next.js, with hands-on ownership from architecture to deployment. My scope includes API integration, CI/CD workflows, and production reliability for complex user-facing products.
-              </Typography>
+              </p>
 
-              <Typography variant="body2" className={styles.typewriter} aria-live="polite">
-                <span>{tagline}</span>
-              </Typography>
+              <p className={styles.typewriter} aria-live="polite">{tagline}</p>
 
-              <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 880 }}>
-                {identity.core_trait}
-              </Typography>
+              <p className={styles.coreTrait}>{identity.core_trait}</p>
 
-              <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" className={styles.tags}>
-                <Chip label={`Based in ${identity.location}`} variant="filled" className={styles.infoChip} />
-                {identity.availability?.remote && <Chip label="Remote-ready" variant="filled" className={styles.infoChip} />}
-                {identity.availability?.full_time && <Chip label="Open to full-time" variant="filled" className={styles.infoChip} />}
-              </Stack>
+              <div className={styles.tags}>
+                <Chip className={styles.infoChip}>{`Based in ${identity.location}`}</Chip>
+                {identity.availability?.remote ? <Chip className={styles.infoChip}>Remote-ready</Chip> : null}
+                {identity.availability?.full_time ? <Chip className={styles.infoChip}>Open to full-time</Chip> : null}
+              </div>
 
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.2}>
-                <Button
-                  variant="contained"
-                  endIcon={<ArrowOutwardRoundedIcon />}
-                  component="a"
-                  href={`mailto:${site.contact.email}`}
-                >
+              <div className={styles.heroActions}>
+                <Button variant="contained" endIcon={<IconExternal />} href="/contact">
                   Contact for hiring
                 </Button>
-                <Button variant="outlined" startIcon={<DescriptionRoundedIcon />} href="/resume">
+                <Button variant="outlined" startIcon={<IconMail />} href="/resume">
                   Review resume
                 </Button>
                 <Button variant="text" href="/projects">
                   View project outcomes
                 </Button>
-              </Stack>
-            </Stack>
+              </div>
+            </div>
 
-            <Box className={styles.photoWrap}>
-              <Avatar
-                src={profilePhotoSrc}
+            <div className={styles.photoWrap}>
+              <Image
+                src={primaryPhoto}
                 alt={identity.name}
                 className={styles.profilePhoto}
-                imgProps={{ loading: 'lazy', decoding: 'async' }}
+                width={176}
+                height={176}
+                sizes="(max-width: 980px) 132px, 176px"
+                priority
+                fetchPriority="high"
               />
-            </Box>
-          </Box>
-        </Box>
+            </div>
+          </div>
+        </div>
       </Card>
 
-      <Card variant="outlined">
+      <Card>
         <CardContent>
-          <Typography variant="h3" sx={{ mb: 1.2 }}>
-            Quick proof points
-          </Typography>
-          <Box className={styles.metricGrid}>
+          <h3 className={styles.sectionTitle}>Quick proof points</h3>
+          <div className={styles.metricGrid}>
             {metrics.map((item) => (
               <MetricCard key={item.label} label={item.label} value={item.value} detail={item.detail} />
             ))}
-          </Box>
+          </div>
         </CardContent>
       </Card>
 
-      <Card variant="outlined">
+      <Card>
         <CardContent>
-          <Typography component="h2" variant="h3" sx={{ mb: 1.2 }}>
-            Technical Expertise
-          </Typography>
-          <Box component="ul" sx={{ m: 0, pl: 2.5 }}>
+          <h2 className={styles.sectionTitle}>Technical Expertise</h2>
+          <ul className={styles.list}>
             {technicalExpertise.map((item) => (
-              <Typography key={item} component="li" variant="body2" sx={{ mb: 0.55 }}>
-                {item}
-              </Typography>
+              <li key={item}>{item}</li>
             ))}
-          </Box>
+          </ul>
         </CardContent>
       </Card>
 
-      <Box className={styles.tileGrid}>
-        <Card variant="outlined">
+      <div className={styles.tileGrid}>
+        <Card>
           <CardContent>
-            <Typography variant="h3" sx={{ mb: 1.2 }}>
-              Core strengths
-            </Typography>
-            <Stack spacing={0.9}>
+            <h3 className={styles.sectionTitle}>Core strengths</h3>
+            <div className={styles.bullets}>
               {capabilities.map((item) => (
-                <Typography key={item} variant="body2">
-                  • {item}
-                </Typography>
+                <p key={item}>• {item}</p>
               ))}
-            </Stack>
-            <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mt: 1.8 }}>
+            </div>
+            <div className={styles.skillChips}>
               {resume.core_skills.slice(0, 10).map((skill) => (
-                <Chip key={skill} label={skill} />
+                <Chip key={skill}>{skill}</Chip>
               ))}
-            </Stack>
+            </div>
           </CardContent>
         </Card>
 
-        <Card variant="outlined">
+        <Card>
           <CardContent>
-            <Typography variant="h3" sx={{ mb: 1.2 }}>
-              Delivery outcomes
-            </Typography>
-            <Stack spacing={1.2}>
+            <h3 className={styles.sectionTitle}>Delivery outcomes</h3>
+            <div className={styles.bulletsMuted}>
               {outcomes.map((outcome) => (
-                <Typography key={outcome} variant="body2" color="text.secondary">
-                  • {outcome}
-                </Typography>
+                <p key={outcome}>• {outcome}</p>
               ))}
-            </Stack>
+            </div>
 
-            <Typography variant="h3" sx={{ mt: 2.2, mb: 1.1 }}>
-              Need this in your team?
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <h3 className={styles.sectionTitle}>Need this in your team?</h3>
+            <p className={styles.coreTrait}>
               For teams needing a senior individual contributor with ownership mindset, I can own complex delivery tracks while staying deeply hands-on in execution.
-            </Typography>
-            <Button variant="contained" sx={{ mt: 1.4 }} href="/contact">
-              Go to contact details
-            </Button>
+            </p>
+            <Button variant="contained" href="/contact">Go to contact details</Button>
           </CardContent>
         </Card>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
