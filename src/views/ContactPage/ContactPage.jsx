@@ -73,11 +73,44 @@ export default function ContactPage() {
                   Open Wellfound
                 </Button>
               ) : null}
-              <Button className={styles.actionButton} variant="outlined" href={`tel:${contact.phone}`}>
-                Call phone
-              </Button>
-            </div>
-            <p className={styles.pageLead}>WhatsApp business number: {contact.phone}</p>
+          <Button className={styles.actionButton} variant="outlined" href={`tel:${contact.phone}`}>
+            Call phone
+          </Button>
+          {contact.instagram ? (
+            <Button
+              className={styles.actionButton}
+              variant="outlined"
+              href={contact.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram
+            </Button>
+          ) : null}
+          {contact.facebook ? (
+            <Button
+              className={styles.actionButton}
+              variant="outlined"
+              href={contact.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Facebook
+            </Button>
+          ) : null}
+          {contact.twitter ? (
+            <Button
+              className={styles.actionButton}
+              variant="outlined"
+              href={contact.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              X / Twitter
+            </Button>
+          ) : null}
+        </div>
+        <p className={styles.pageLead}>WhatsApp business number: {contact.phone}</p>
           </CardContent>
         </Card>
 

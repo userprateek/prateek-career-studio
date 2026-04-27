@@ -6,6 +6,16 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://userprateek.com/prateek-kumar</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://userprateek.com/prateek-kumar-maventech</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://userprateek.com/projects</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -17,7 +27,7 @@
   </url>
   <url>
     <loc>https://userprateek.com/contact</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

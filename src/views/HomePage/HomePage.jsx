@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Button, Card, CardContent, Chip, IconExternal, IconMail } from '../../components/ui/Primitives';
 import profile from '../../content/profile.json';
@@ -81,6 +82,11 @@ export default function HomePage() {
     'API Integration'
   ];
 
+  const seoLinks = [
+    { path: '/prateek-kumar', label: 'Prateek Kumar Profile' },
+    { path: '/prateek-kumar-maventech', label: 'Prateek at Maventech' }
+  ];
+
   return (
     <div className={styles.page}>
       <Card className={styles.hero}>
@@ -89,7 +95,7 @@ export default function HomePage() {
             <div className={styles.fadeUp}>
               <Chip tone="primary" className={styles.availabilityBanner}>Open to full-time and freelance roles</Chip>
 
-              <h1 className={styles.heroTitle}>Prateek Kumar - Senior Software Engineer | Frontend Engineer</h1>
+              <h1 className={styles.heroTitle}>Prateek Kumar – Frontend Developer at Maventech Labs</h1>
 
               <h2 className={styles.headline}>{identity.positioning}</h2>
 
@@ -184,14 +190,72 @@ export default function HomePage() {
               ))}
             </div>
 
-            <h3 className={styles.sectionTitle}>Need this in your team?</h3>
-            <p className={styles.coreTrait}>
-              For teams needing a senior individual contributor with ownership mindset, I can own complex delivery tracks while staying deeply hands-on in execution.
-            </p>
-            <Button variant="contained" href="/contact">Go to contact details</Button>
-          </CardContent>
-        </Card>
-      </div>
+      <h3 className={styles.sectionTitle}>Need this in your team?</h3>
+      <p className={styles.coreTrait}>
+        For teams needing a senior individual contributor with ownership mindset, I can own complex delivery tracks while staying deeply hands-on in execution.
+      </p>
+      <Button variant="contained" href="/contact">Go to contact details</Button>
+    </CardContent>
+  </Card>
+</div>
+
+<Card>
+  <CardContent>
+    <h2 className={styles.sectionTitle}>About Prateek Kumar</h2>
+    <p className={styles.coreTrait}>
+      I am <strong>Prateek Kumar</strong>, a Frontend Developer with 6+ years of experience building production-grade web applications.
+      Currently working at <strong>Maventech Labs</strong> (also known as Maven), I specialize in React.js, Next.js, and modern frontend architecture.
+      My work spans from legacy system migrations to platform consolidations, always focusing on system reliability and clean code.
+    </p>
+    <p className={styles.coreTrait}>
+      Keywords: Prateek Kumar, Prateek Kumar Maventech, Prateek Maven, Frontend Developer, React.js Developer, Next.js Developer
+    </p>
+    <div className={styles.skillChips}>
+      {seoLinks.map((link) => (
+        <Link key={link.path} href={link.path} passHref>
+          <Chip as="a" className={styles.infoChip}>{link.label}</Chip>
+        </Link>
+      ))}
     </div>
-  );
+  </CardContent>
+</Card>
+
+<Card>
+  <CardContent>
+    <h2 className={styles.sectionTitle}>Work Experience</h2>
+    <div className={styles.bullets}>
+      <p><strong>Maventech Labs</strong> – Senior Software Engineer (Frontend Developer)</p>
+      <p>2019 – Present | Bengaluru, India</p>
+      <p>Leading React/Next.js architecture, CI/CD ownership, and production debugging for enterprise workflows.</p>
+    </div>
+    <div className={styles.bulletsMuted} style={{ marginTop: '1rem' }}>
+      <p>Previously: Software Engineer at Travelyaari (2019 – 2021)</p>
+    </div>
+  </CardContent>
+</Card>
+
+<Card>
+  <CardContent>
+    <h2 className={styles.sectionTitle}>Projects</h2>
+    <div className={styles.bullets}>
+      <p><strong>Cargo Web</strong> – Legacy-to-web migration with API-first architecture</p>
+      <p><strong>Platform Consolidation</strong> – Unified booking, payments, and mobile delivery</p>
+      <p><strong>AWTAR / KSRTC</strong> – Government project with React Native WebView delivery</p>
+    </div>
+    <Button variant="outlined" href="/projects" style={{ marginTop: '1rem' }}>View all projects</Button>
+  </CardContent>
+</Card>
+
+<Card>
+  <CardContent>
+    <h2 className={styles.sectionTitle}>Skills</h2>
+    <div className={styles.skillChips}>
+      {['React.js', 'Next.js', 'JavaScript', 'TypeScript', 'Redux', 'Node.js', 'CI/CD', 'System Architecture'].map((skill) => (
+        <Chip key={skill}>{skill}</Chip>
+      ))}
+    </div>
+  </CardContent>
+</Card>
+</div>
+);
 }

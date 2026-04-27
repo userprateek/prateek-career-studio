@@ -4,10 +4,17 @@
     "email": "info@userprateek.com",
     "phone": "+919036593930",
     "linkedin": "https://www.linkedin.com/in/userprateek",
-    "wellfound": "https://wellfound.com/u/userprateek"
+    "wellfound": "https://wellfound.com/u/userprateek",
+    "github": "https://github.com/userprateek",
+    "instagram": "https://www.instagram.com/userprateek",
+    "facebook": "https://www.facebook.com/userprateek",
+    "twitter": "https://x.com/userprateek",
+    "x": "https://x.com/userprateek"
   },
   "routes": [
     { "path": "/", "label": "Home" },
+    { "path": "/prateek-kumar", "label": "Prateek Kumar" },
+    { "path": "/prateek-kumar-maventech", "label": "Prateek at Maventech" },
     { "path": "/projects", "label": "Projects" },
     { "path": "/resume", "label": "Resume" },
     { "path": "/contact", "label": "Contact" }

@@ -22,7 +22,7 @@ export const metadata = {
     follow: true
   },
   alternates: {
-    canonical: '/'
+    canonical: seo.site_url
   },
   openGraph: {
     type: seo.routes['/']?.type || 'website',
@@ -49,16 +49,24 @@ function buildSchema() {
         '@type': 'Person',
         '@id': `${seo.site_url}/#person`,
         name: profile.identity.name,
-        jobTitle: seo.person_job_title,
-        description: seo.person_description,
         url: seo.site_url,
         image: `${seo.site_url}${seo.default_image}`,
+        jobTitle: seo.person_job_title,
+        worksFor: {
+          '@type': 'Organization',
+          name: 'Maventech Labs'
+        },
+        description: seo.person_description,
         sameAs: seo.same_as,
         homeLocation: {
           '@type': 'Place',
           name: profile.identity.location
         },
-        knowsAbout: resume.core_skills.slice(0, 10)
+        knowsAbout: resume.core_skills.slice(0, 10),
+        alumniOf: {
+          '@type': 'CollegeOrUniversity',
+          name: 'Gurukula Kangri Vishwavidyalaya'
+        }
       },
       {
         '@type': 'WebSite',
