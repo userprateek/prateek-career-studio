@@ -9,7 +9,7 @@ export const metadata = {
   title: routeSeo.title,
   description: routeSeo.description,
   alternates: {
-    canonical: '/'
+    canonical: seo.site_url
   },
   openGraph: {
     type: routeSeo.type,
